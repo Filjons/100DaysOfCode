@@ -4,15 +4,15 @@ import art
 def encrypt(plain_text, shift):
     encrypted_message = ""
     for letter in plain_text:
+        
+            index = alphabet.index(letter)
 
-        index = alphabet.index(letter)
+            if (index + shift) > len(alphabet):
+                index = (index + shift) - len(alphabet)
+            else:
+                index = index + shift
 
-        if (index + shift) > len(alphabet):
-            index = (index + shift) - len(alphabet)
-        else:
-            index = index + shift
-
-        encrypted_message += alphabet[index]
+            encrypted_message += alphabet[index]
     
     print(f"The encoded text is {encrypted_message}")
 
@@ -29,20 +29,24 @@ def ceasar(text, shift, action):
     message = ""
     if action == "encode":
         for letter in text:
+            if letter in alphabet:
+                index = alphabet.index(letter)
 
-            index = alphabet.index(letter)
-
-            if (index + shift) > len(alphabet):
-                index = (index + shift) - len(alphabet)
+                if (index + shift) > len(alphabet):
+                    index = (index + shift) - len(alphabet)
+                else:
+                    index = index + shift
+                message += alphabet[index]
             else:
-                index = index + shift
-            message += alphabet[index]
+                message += letter
     else:
         for letter in text:
+            if letter in alphabet:
+                index = alphabet.index(letter) - shift
 
-            index = alphabet.index(letter) - shift
-
-            message += alphabet[index]
+                message += alphabet[index]
+            else:
+                message += letter
     print(f"The encoded text is {message}")
              
 
@@ -65,3 +69,5 @@ while run == "yes":
     #    print("Please try again!")
     ceasar(text=text,shift=shift,action=direction)
     run = input("Type 'yes' if you want to go again. Otherwise type 'no'.\n")
+
+print("Goodbye!")
