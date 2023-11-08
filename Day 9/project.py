@@ -4,13 +4,16 @@
 bidders = {}
 
 def find_highest_bid():
-    bid_list = bidders.values()
-    bidders_list = bidders.keys()
-    max =  max(bid_list)
-    max_index = bid_list.index(max)
-    max_bidder = bidders_list[max_index]
-    print(f"The winner is {max_bidder} with {max}")
+    highest_bid = 0
+    winner = ""
+
+    for bidder in bidders:
+        bid = bidders[bidder]
+        if bid > highest_bid:
+            highest_bid = bid
+            winner = bidder
     
+    print(f"The winner is {winner} with {highest_bid}")
 
 def add_new_bid(new_bidder, new_bid):
     bidders[new_bidder] = new_bid
