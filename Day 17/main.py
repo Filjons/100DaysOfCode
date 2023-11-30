@@ -20,17 +20,18 @@ for data in question_data:
 quiz_brain = QuizBrain(question_bank)
 
 # Start the game
-question = quiz_brain.next_question()
-while question != None:
+
+while quiz_brain.has_question():
+
+    print(f"Score: {quiz_brain.get_score()}")
+
+    question = quiz_brain.next_question()
+
     # ask the user the question and take an answer
     player = input(f"Question {quiz_brain.question_number}: {question.text} (True/False)?: ").capitalize()
 
-    # check the answer
-    if player == question.answer:
-        print("Correct!")
-        question = quiz_brain.next_question()
-    else:
-        print("Wrong answer. Please play again!")
-        question = None
+    # check the answer and add score
+    if quiz_brain.check_answer(player,question.answer):
+        quiz_brain.add_score()
 
-
+print(f"That's it! You got {quiz_brain.get_score()} / {quiz_brain.question_number} answers right!")
