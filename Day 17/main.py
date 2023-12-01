@@ -1,5 +1,5 @@
 from question_model import Question
-from data import question_data
+from data import new_question_data
 from quiz_brain import QuizBrain
 
 '''
@@ -11,9 +11,9 @@ TODO
 
 # convert question data into Question objects and save them to a list for easier access.
 question_bank = []
-for data in question_data:
-    text = data['text']
-    answer = data['answer']
+for data in new_question_data:
+    text = data['question']
+    answer = data['correct_answer']
     new_question = Question(q_text=text, q_answer=answer)
     question_bank.append(new_question)
 
@@ -28,10 +28,12 @@ while quiz_brain.has_question():
     question = quiz_brain.next_question()
 
     # ask the user the question and take an answer
-    player = input(f"Question {quiz_brain.question_number}: {question.text} (True/False)?: ").capitalize()
+    player = input(
+        f"Question {quiz_brain.question_number}: {question.text} (True/False)?: ").capitalize()
 
     # check the answer and add score
-    if quiz_brain.check_answer(player,question.answer):
+    if quiz_brain.check_answer(player, question.answer):
         quiz_brain.add_score()
 
-print(f"That's it! You got {quiz_brain.get_score()} / {quiz_brain.question_number} answers right!")
+print(
+    f"That's it! You got {quiz_brain.get_score()} / {quiz_brain.question_number} answers right!")
