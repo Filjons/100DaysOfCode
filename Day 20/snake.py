@@ -9,11 +9,15 @@ UP = 90
 LEFT = 180
 DOWN = 270
 
+
 class Snake:
+
     def __init__(self):
         self.sections = []
         self.new_snake()
         self.head = self.sections[0]
+        self.speed = SPEED
+        
     def new_snake(self):
 
         for i in range(3):
@@ -40,7 +44,8 @@ class Snake:
         section.sety(new_y)
 
         self.sections.append(section)
-        
+        if self.speed > 0.0:
+            self.speed -= 0.01
     # take the positions of all the body segments and store them in a list
 
     def move_snake(self):
@@ -51,7 +56,7 @@ class Snake:
             new_y = self.sections[i-1].ycor()
             self.sections[i].goto(new_x, new_y)
         self.head.forward(MOVE_DISTANCE)
-        sleep(SPEED)
+        sleep(self.speed)
 
     def go_right(self):
         if not self.head.heading() == LEFT:
