@@ -22,12 +22,12 @@ padel_r = Padel((270, 0))
 padel_l = Padel((-270, 0))
 
 # Ball
-ball = Ball(x_limit=X_LIMIT, y_limit=Y_LIMIT)
+ball = Ball(x_limit=X_LIMIT, y_limit=Y_LIMIT, padel_limit=PADEL_LIMIT)
 
 # Scoreboards
-score_l = Scoreboard((30, 260))
+score_l = Scoreboard((-30, 260))
 score_l.refresh_score()
-score_r = Scoreboard((-30, 260))
+score_r = Scoreboard((30, 260))
 score_r.refresh_score()
 
 # Divider
@@ -43,12 +43,15 @@ game_on = True
 while game_on:
     sleep(0.1)
     screen.update()
-    ball.move()
-    ball.wall_collision(y_limit=Y_LIMIT)
-    ball.padel_collision(padel_limit=PADEL_LIMIT, padel_distance=ball.distance(padel_r))
-    if ball.padel_miss(x_limit=X_LIMIT):
-        score_r.new_score()
-    ball.padel_collision(padel_limit=-PADEL_LIMIT, padel_distance=ball.distance(padel_l))
-    if ball.padel_miss(x_limit=-X_LIMIT):
+    score = ball.move()
+    if score == 1:
         score_l.new_score()
+    elif score == 2:
+        score_r.new_score()
+
+    ball.wall_collision()
+    ball.padel_collision(padel_distance=ball.distance(padel_r))
+    
+    ball.padel_collision(padel_distance=ball.distance(padel_l))
+    
 
