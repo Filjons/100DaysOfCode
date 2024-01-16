@@ -3,17 +3,21 @@ from turtle import Turtle, xcor, ycor
 
 class Little_turtle(Turtle):
 
-    def __init__(self, x_limit, y_limit, start_position):
+    def __init__(self, x_limit, y_limit, start_position, finish_position):
         super().__init__()
+        
+        self.x_limit = x_limit
+        self.y_limit = y_limit
+        self.score = 0
+        self.goal = finish_position
+        self.start = start_position
+
         self.up()
         self.shape('turtle')
         self.color('green')
         self.shapesize(1.0, 1.0)
         self.setheading(90)
-        self.goto(start_position)
-        self.x_limit = x_limit
-        self.y_limit = y_limit
-        
+        self.goto(self.start)
 
 
     def go_forward(self):
@@ -28,16 +32,17 @@ class Little_turtle(Turtle):
         pos = (self.xcor() - 10, self.ycor())
         self.goto(pos)
 
-    def ball_reset(self):
-        self.bounce_x()
-        self.goto(0, 0)
+    def turtle_reset(self):
+       
+        self.goto(self.start)
 
-    def wall_collision(self):
+    def turtle_win(self):
 
-        if self.ycor() > self.y_limit:
-            self.bounce_y()
+        if self.ycor() >= self.goal:
+            self.score += 1
+            self.turtle_reset()
 
-    def padel_collision(self, padel_distance):
+    def car_collision(self, padel_distance):
 
         if self.right_padel_limit > 0 and self.xcor() > self.right_padel_limit:
             
