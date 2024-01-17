@@ -4,6 +4,7 @@ from time import sleep
 from turtle import Screen
 from little_turtle import Little_turtle
 from score_board import Scoreboard
+from car import Car
 
 Y_LIMIT = 270
 X_LIMIT = 270
@@ -16,12 +17,16 @@ screen.setup(width=600, height=600)
 screen.bgcolor("white")
 screen.title("Turtle Crossing")
 screen.tracer(0)
+screen.colormode(255)
 
 # The player turtle
 timmy_turtle = Little_turtle(X_LIMIT, Y_LIMIT, START_POSITION, FINISH_POSITION)
 
 # The score
 scoreboard = Scoreboard(SCOREBOARD_POS)
+traffic = []
+for i in range(0, 10):
+    traffic.append(Car(x_stop=-260, x_start=300))
 
 # Game mechanics
 screen.listen()
