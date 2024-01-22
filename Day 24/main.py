@@ -28,3 +28,5 @@ with open("C:/Users/filjon/OneDrive - Mildef/Dokument/Code/100DaysOfCode/Day 24/
 
 with open("C:/Users/filjon/OneDrive - Mildef/Dokument/Code/100DaysOfCode/Day 24/my_file.txt", mode="w") as file:
     file.write("ello world!")
+
+    
