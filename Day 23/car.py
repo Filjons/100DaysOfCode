@@ -4,7 +4,7 @@ from turtle import Turtle, xcor, ycor
 
 class Car(Turtle):
 
-    def __init__(self, x_start, x_stop, car_speed = 10):
+    def __init__(self, x_start, x_stop, car_speed = 1):
         super().__init__()
 
         self.start_position = (randint(x_start,x_start + 100), randint(-260, 260))
@@ -18,7 +18,8 @@ class Car(Turtle):
         self.goto(self.start_position)
 
     def car_move(self):
-        new_pos = (self.xcor(), self.ycor())
+        new_pos = (self.xcor() - self.speedv, self.ycor())
+        print(new_pos)
         self.goto(new_pos)
 
     def car_color(self):

@@ -42,14 +42,5 @@ class Little_turtle(Turtle):
             self.score += 1
             self.turtle_reset()
 
-    def car_collision(self, padel_distance):
-
-        if self.right_padel_limit > 0 and self.xcor() > self.right_padel_limit:
-            
-            if padel_distance < 200:
-                
-                self.bounce_x()
-        elif self.left_padel_limit < 0 and self.xcor() < self.left_padel_limit:
-            
-            if padel_distance < 200:
-                self.bounce_x()
+    def turtle_game_over(self):
+        print(f"Game over! You got {self.score} points!")
