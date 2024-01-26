@@ -1,10 +1,11 @@
 #import csv
 #from numpy import imag
+import stat
 import pandas as pd
 import turtle
 
 
-'''with open("Day 25\weather_data.csv") as data_file:
+'''with open("Day 25\\weather_data.csv") as data_file:
     data = csv.reader(data_file)
     temperatures = []
     for row in data:
@@ -55,12 +56,21 @@ DATA_FILE = "Day 25\\50_states.csv"
 IMAGE = "Day 25\\blank_states_img.gif"
 
 data_file = pd.read_csv(DATA_FILE)
-
+state_list = list(data_file["state"])
 screen = turtle.Screen()
 screen.title("U.S. States Game")
 screen.addshape(IMAGE)
 turtle.shape(IMAGE)
 
 answer_state = screen,turtle.textinput(title="Guess the State", prompt="What's another states name?")
-s_count = csv_file.(str(answer_state).title())
+
+if answer_state[1] in state_list:
+    state = data_file[data_file.state == answer_state[1]]
+    print(type(state))
+    coordinates = (state[1], state[2])
+    print(coordinates)
+else:
+    print("Not a state!")
+#print(.str.match(answer_state))
+#s_count = csv_file.(str(answer_state).title())
 turtle.mainloop()
