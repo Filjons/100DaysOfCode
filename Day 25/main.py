@@ -56,21 +56,41 @@ DATA_FILE = "Day 25\\50_states.csv"
 IMAGE = "Day 25\\blank_states_img.gif"
 
 data_file = pd.read_csv(DATA_FILE)
-state_list = list(data_file["state"])
+#state_list = list(data_file["state"])
+state_list = data_file.state.to_list()
 screen = turtle.Screen()
 screen.title("U.S. States Game")
 screen.addshape(IMAGE)
 turtle.shape(IMAGE)
 
-answer_state = screen,turtle.textinput(title="Guess the State", prompt="What's another states name?")
 
-if answer_state[1] in state_list:
-    state = data_file[data_file.state == answer_state[1]]
-    print(type(state))
-    coordinates = (state[1], state[2])
-    print(coordinates)
-else:
-    print("Not a state!")
-#print(.str.match(answer_state))
-#s_count = csv_file.(str(answer_state).title())
-turtle.mainloop()
+answered_states = []
+while len(answered_states) < 50:
+    answer_state = turtle.textinput(title=f"Guess the State, {len(answered_states)}/50 correct.", prompt="What's another states name?").title()
+
+    if answer_state in state_list:
+        answered_states.append(answer_state)
+        # Extract the x and y coordinates from the answered state
+        state = data_file[data_file.state == answer_state]
+        #coordinates = (state["x"].values[0], state["y"].values[0])
+        coordinates = (state.x.item(), state.y.item())
+        state_writer = turtle.Turtle()
+        state_writer.hideturtle()
+        state_writer.penup()
+        state_writer.goto(coordinates)
+        state_writer.write(state.state.item())
+
+    else:
+        if answer_state == "Exit":
+            break
+        else:
+            print("That's not a state!")
+    #print(.str.match(answer_state))
+    #s_count = csv_file.(str(answer_state).title())
+remaining_states = []
+for s in state_list:
+    if s not in answered_states:
+        remaining_states.append(s)
+    
+pd.DataFrame(remaining_states).to_csv("Day 25\\missing_states")
+    
