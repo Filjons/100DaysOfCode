@@ -87,10 +87,11 @@ while len(answered_states) < 50:
             print("That's not a state!")
     #print(.str.match(answer_state))
     #s_count = csv_file.(str(answer_state).title())
-remaining_states = []
+remaining_states = [s for s in state_list if s not in answered_states]
+'''
 for s in state_list:
     if s not in answered_states:
         remaining_states.append(s)
-    
+ '''   
 pd.DataFrame(remaining_states).to_csv("Day 25\\missing_states")
     

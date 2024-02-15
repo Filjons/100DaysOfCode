@@ -14,7 +14,7 @@ list_of_ints = [int(n) for n in list_of_strings]
 result = [n for n in list_of_ints if n % 2 == 0]
 
 print(result)
-'''
+
 # Ex 3 - Compare lists
 
 with open("Day 26\\file1.txt", mode="r") as file:
@@ -30,3 +30,10 @@ with open("Day 26\\file2.txt", mode="r") as file:
 compared_list = [int(n) for n in list_1 if n in list_2]
 #result = [int(n) for n in compared_list if n.isdigit()]
 print(compared_list)
+'''
+# Ex 4 - Dict comprehention
+import random
+names = ['Alex', 'Betch', 'Caroline', 'Dave', 'Eleanor', 'Freddie']
+students_scores = {student:random.randint(1,100) for student in names}
+passed_students = {student:value for (student,value) in students_scores.items() if value > 50}
+print(passed_students)
