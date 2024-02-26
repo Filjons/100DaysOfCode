@@ -11,7 +11,7 @@ result = 0
 # Make a window
 window = Tk()
 window.title("Mile to Km Converter")
-window.minsize(height=300, width=500)
+window.minsize(height=30, width=50)
 # Config a label
 input = Entry()
 input.grid(column=2, row=1)
