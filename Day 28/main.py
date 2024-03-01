@@ -15,7 +15,17 @@ LONG_BREAK_MIN = 20
 # ---------------------------- TIMER MECHANISM ------------------------------- # 
 
 def start_timer():
-    count_down(300)
+    global reps
+    work_sec = WORK_MIN * 60
+    short_break_sec = SHORT_BREAK_MIN * 60
+    long_break_sec = LONG_BREAK_MIN * 60
+
+    #If it's the 1sth or other rep
+    count_down(work_sec)
+    #If it's the 8th rep
+    count_down(long_break_sec)
+    #If it's the 2nd or something rep
+    count_down(short_break_sec)
     
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- # 
 
