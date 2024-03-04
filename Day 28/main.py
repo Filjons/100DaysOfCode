@@ -6,11 +6,12 @@ RED = "#e7305b"
 GREEN = "#9bdeac"
 YELLOW = "#f7f5dd"
 FONT_NAME = "Courier"
-WORK_MIN = 25
-SHORT_BREAK_MIN = 5
-LONG_BREAK_MIN = 20
+WORK_MIN = 0.1
+SHORT_BREAK_MIN = 0.1
+LONG_BREAK_MIN = 0.1
 
 reps = 0
+marks = ""
 
 def is_even(number):
     if number % 2 == 0:
@@ -20,7 +21,7 @@ def is_even(number):
 # ---------------------------- TIMER RESET ------------------------------- # 
 def reset_timer():
     global reps
-    reps = 0
+    reps = 1
 # ---------------------------- TIMER MECHANISM ------------------------------- # 
 
 def start_timer():
@@ -32,22 +33,24 @@ def start_timer():
 
     #If it's the 8th rep
     if reps % 8 == 0:
-        title_label.config(text="Long Break")
+        title_label.config(text="Break", fg=RED)
         count_down(long_break_sec)
         
     #If it's even
     elif is_even(reps):
-        title_label.config(text="Short Break")
+        title_label.config(text="Break", fg=PINK)
         count_down(short_break_sec)
         
     #If it's the odd
     else:
-        title_label.config(text="Work")
+        title_label.config(text="Work", fg=GREEN)
         count_down(work_sec)
             
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- # 
 
 def count_down(count):
+    global marks
+
     minutes = math.floor(count / 60)
     seconds = count % 60
     if seconds == 0:
@@ -58,6 +61,9 @@ def count_down(count):
         window.after(1000, count_down, count -1)
     else:
         start_timer()
+        if reps % 2 == 0:
+            marks += "X"
+            check_marks.config(text=marks)
     
 # ---------------------------- UI SETUP ------------------------------- #
         
@@ -81,7 +87,7 @@ start_button.grid(column=0, row=2)
 reset_button = Button(text="Reset", command=reset_timer, highlightthickness=0)
 reset_button.grid(column=2,row=2)
 
-check_marks = Label(text="x", fg=GREEN, bg=YELLOW)
+check_marks = Label(text=marks, fg=GREEN, bg=YELLOW)
 check_marks.grid(column=1,row=3)
 
 window.mainloop()
