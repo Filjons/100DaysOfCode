@@ -12,6 +12,7 @@ LONG_BREAK_MIN = 0.1
 
 reps = 0
 marks = ""
+timer = None
 
 def is_even(number):
     if number % 2 == 0:
@@ -20,8 +21,21 @@ def is_even(number):
         return False
 # ---------------------------- TIMER RESET ------------------------------- # 
 def reset_timer():
+    global timer
     global reps
-    reps = 1
+    global marks
+
+    #cancel process
+    window.after_cancel(timer)
+    #timer_text
+    canvas.itemconfig(timer_text, text=f"00:00")
+    #title_label
+    title_label.config(text="Timer", font=(FONT_NAME, 45, "bold"),bg=YELLOW, fg=GREEN)
+    #reset check_marks
+    reps = 0
+    marks = ""
+    check_marks.config(text=marks)
+
 # ---------------------------- TIMER MECHANISM ------------------------------- # 
 
 def start_timer():
@@ -50,7 +64,7 @@ def start_timer():
 
 def count_down(count):
     global marks
-
+    global timer
     minutes = math.floor(count / 60)
     seconds = count % 60
     if seconds == 0:
@@ -58,7 +72,7 @@ def count_down(count):
 
     canvas.itemconfig(timer_text, text=f"{minutes}:{seconds}")
     if count > 0:
-        window.after(1000, count_down, count -1)
+      timer = window.after(1000, count_down, count -1)
     else:
         start_timer()
         if reps % 2 == 0:
