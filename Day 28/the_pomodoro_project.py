@@ -14,16 +14,11 @@ reps = 0
 marks = ""
 timer = None
 
-def is_even(number):
-    if number % 2 == 0:
-        return True
-    else:
-        return False
 # ---------------------------- TIMER RESET ------------------------------- # 
 def reset_timer():
     global timer
     global reps
-    global marks
+    
 
     #cancel process
     window.after_cancel(timer)
@@ -33,13 +28,20 @@ def reset_timer():
     title_label.config(text="Timer", font=(FONT_NAME, 45, "bold"),bg=YELLOW, fg=GREEN)
     #reset check_marks
     reps = 0
+    reset_marks()
+
+def reset_marks():
+    global marks
+
     marks = ""
     check_marks.config(text=marks)
+
 
 # ---------------------------- TIMER MECHANISM ------------------------------- # 
 
 def start_timer():
     global reps
+    global marks
     reps += 1
     work_sec = WORK_MIN * 60
     short_break_sec = SHORT_BREAK_MIN * 60
@@ -49,21 +51,25 @@ def start_timer():
     if reps % 8 == 0:
         title_label.config(text="Break", fg=RED)
         count_down(long_break_sec)
+        reset_marks()
         
     #If it's even
-    elif is_even(reps):
+    elif reps % 2 == 0:
         title_label.config(text="Break", fg=PINK)
         count_down(short_break_sec)
+        marks += "X"
+        check_marks.config(text=marks)
         
     #If it's the odd
     else:
         title_label.config(text="Work", fg=GREEN)
         count_down(work_sec)
+        
             
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- # 
 
 def count_down(count):
-    global marks
+    
     global timer
     minutes = math.floor(count / 60)
     seconds = count % 60
@@ -75,9 +81,7 @@ def count_down(count):
       timer = window.after(1000, count_down, count -1)
     else:
         start_timer()
-        if reps % 2 == 0:
-            marks += "X"
-            check_marks.config(text=marks)
+            
     
 # ---------------------------- UI SETUP ------------------------------- #
         
