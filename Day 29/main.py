@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 import random
 #----- Constants -----
 
@@ -7,22 +8,26 @@ LETTERS = ""
 #----- PASSWORD GENERATOR -----
 def generate_password():
 
-    global password_input
     password = ""
     for i in range(0,10):
 
         password += random.choice('0123456789abcdefghijklmn')
-
+    password_input.delete(0,END)
     password_input.insert(END, string=f"{password}")
 
 #----- SAVE PASSWORD -----
 def save_password():
-    global website_input
-    global username_input
-    global password_input
+    
+    website = website_input.get()
+    username = username_input.get()
+    password = password_input.get()
 
-    with open("password_file.txt", "a") as pf:
-        pf.write(f"{website_input.get()} | {username_input.get()} | {password_input.get()}")
+    if messagebox.askokcancel(title="Save Information",message=f"Are these details correct? \nWebsite:{website}\nUsername:{username}\nPassword:{password}"):
+        with open("password_file.txt", "a") as pf:
+            pf.write(f"{website} | {username} | {password}\n")
+    
+    website_input.delete(0,END)
+    password_input.delete(0,END)
 
 #----- UI SETUP -----
 window = Tk()
