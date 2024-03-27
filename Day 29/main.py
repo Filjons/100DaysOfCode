@@ -16,6 +16,19 @@ def generate_password():
     password_input.insert(END, string=f"{password}")
 
 #----- SAVE PASSWORD -----
+'''def save_password():
+    
+    website = website_input.get()
+    username = username_input.get()
+    password = password_input.get()
+    if website == "" or username == "" or password == "":
+       messagebox.askretrycancel(title="Missing Information", message="Please enter all information.") 
+    elif messagebox.askokcancel(title="Save Information",message=f"Is this information correct? \nWebsite: {website}\nUsername: {username}\nPassword: {password}"):
+        with open("password_file.txt", "a") as pf:
+            pf.write(f"{website} | {username} | {password}\n")
+    
+        website_input.delete(0,END)
+        password_input.delete(0,END)'''
 def save_password():
     
     website = website_input.get()
