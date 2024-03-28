@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 import random
+import json
 #----- Constants -----
 
 DEFAULT_USERNAME = "Angie"
@@ -34,11 +35,20 @@ def save_password():
     website = website_input.get()
     username = username_input.get()
     password = password_input.get()
+    # Note! json format. 
+    new_data = {
+        website:{
+            "email": username,
+            "password": password,
+        }
+    }
+
     if website == "" or username == "" or password == "":
        messagebox.askretrycancel(title="Missing Information", message="Please enter all information.") 
-    elif messagebox.askokcancel(title="Save Information",message=f"Is this information correct? \nWebsite: {website}\nUsername: {username}\nPassword: {password}"):
-        with open("password_file.txt", "a") as pf:
-            pf.write(f"{website} | {username} | {password}\n")
+    
+    with open("password_file.json", "w") as data_file:
+        json.dump(new_data, data_file, indent=4)
+        #pf.write(f"{website} | {username} | {password}\n")
     
         website_input.delete(0,END)
         password_input.delete(0,END)
