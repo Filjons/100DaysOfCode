@@ -2,21 +2,24 @@ from tkinter import *
 from tkinter import messagebox
 import random
 import json
-#----- Constants -----
+# ----- Constants -----
 
 DEFAULT_USERNAME = "Angie"
 LETTERS = ""
-#----- PASSWORD GENERATOR -----
+# ----- PASSWORD GENERATOR -----
+
+
 def generate_password():
 
     password = ""
-    for i in range(0,10):
+    for i in range(0, 10):
 
         password += random.choice('0123456789abcdefghijklmn')
-    password_input.delete(0,END)
+    password_input.delete(0, END)
     password_input.insert(END, string=f"{password}")
 
-#----- SAVE PASSWORD -----
+
+# ----- SAVE PASSWORD -----
 '''def save_password():
     
     website = website_input.get()
@@ -30,41 +33,55 @@ def generate_password():
     
         website_input.delete(0,END)
         password_input.delete(0,END)'''
+
+
 def save_password():
-    
+
     website = website_input.get()
     username = username_input.get()
     password = password_input.get()
-    # Note! json format. 
+    # Note! json format.
     new_data = {
-        website:{
+        website: {
             "email": username,
             "password": password,
-        }
+        },
     }
 
     if website == "" or username == "" or password == "":
-       messagebox.askretrycancel(title="Missing Information", message="Please enter all information.") 
-    
-    with open("password_file.json", "w") as data_file:
-        json.dump(new_data, data_file, indent=4)
-        #pf.write(f"{website} | {username} | {password}\n")
-    
-        website_input.delete(0,END)
-        password_input.delete(0,END)
+        messagebox.askretrycancel(
+            title="Missing Information", message="Please enter all information.")
 
-#----- UI SETUP -----
+    try:
+        with open("password_file.json", "r") as data_file:
+            # Reading old data
+            data = dict(json.load(data_file))
+            data.update(new_data)
+
+    except FileNotFoundError:
+        with open("password_file.json", "w") as data_file:
+            json.dump(new_data, data_file, indent=4)
+    else:
+        with open("password_file.json", "w") as data_file:
+            json.dump(data, data_file, indent=4)
+
+    finally:
+        website_input.delete(0, END)
+        password_input.delete(0, END)
+
+
+# ----- UI SETUP -----
 window = Tk()
 window.title("Password Manager")
 window.config(padx=50, pady=50)
 
-#----- LOGO -----
-canvas = Canvas(height=200,width=200)
+# ----- LOGO -----
+canvas = Canvas(height=200, width=200)
 logo_img = PhotoImage(file="Day 29\logo.png")
-canvas.create_image(100,100,image=logo_img)
+canvas.create_image(100, 100, image=logo_img)
 canvas.grid(row=0, column=1)
 
-#----- LABELS -----
+# ----- LABELS -----
 website = Label(text="Website")
 website.grid(row=1, column=0)
 
@@ -74,23 +91,23 @@ username.grid(row=2, column=0,)
 password = Label(text="Password")
 password.grid(row=3, column=0)
 
-#----- INPUTS -----
+# ----- INPUTS -----
 website_input = Entry(width=35)
 website_input.grid(row=1, column=1, columnspan=2)
 website_input.focus()
 
 username_input = Entry(width=35)
-username_input.insert(END,string=f"{DEFAULT_USERNAME}")
+username_input.insert(END, string=f"{DEFAULT_USERNAME}")
 username_input.grid(row=2, column=1, columnspan=2)
 
 password_input = Entry(width=20)
 password_input.grid(row=3, column=1)
 
-#----- BUTTONS -----
+# ----- BUTTONS -----
 gen_pass = Button(text="Generate Password", command=generate_password)
-gen_pass.grid(row=3,column=2)
+gen_pass.grid(row=3, column=2)
 
 save_pass = Button(text="Save Password", width=30, command=save_password)
-save_pass.grid(row=4,column=1,columnspan=2)
+save_pass.grid(row=4, column=1, columnspan=2)
 
 window.mainloop()

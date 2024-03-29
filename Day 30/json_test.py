@@ -8,13 +8,13 @@ new_data = {
     website:{
         "email": username,
         "password": password,
-    }
+    },
 }
 newer_data = {
-    website: {
-        "email": username,
-        "password": password,
-    }
+    "website2": {
+        "email": "username2",
+        "password": "password2",
+    },
 }
 
 
@@ -23,14 +23,15 @@ with open("json_file.json", "w") as data_file:
     
 with open("json_file.json", "r") as data_file:
     #Reading old data
-    data = json.load(data_file)
+    
+    data = dict(json.load(data_file))
     print(type(data))
     print(data)
     #Update old data
     data.update(newer_data)
 with open("json_file.json", "w") as data_file:
     # Save updated data
-    json.dump(new_data, data_file, indent=4)
+    json.dump(data, data_file, indent=4)
 
    
 
