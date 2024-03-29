@@ -22,9 +22,17 @@ words_df = pandas.read_csv("Day 26\\NATO-project\\nato_phonetic_alphabet.csv")
 
 words_dict ={value.letter:value.code for (key, value) in words_df.iterrows()}
 
-word = input("Enter word: ").upper()
 
-code_list = [words_dict[letter] for letter in word]
 
-print(code_list)
+while True:
+    try:
+        word = input("Enter word: ").upper()
+        code_list = [words_dict[letter] for letter in word]
+    except KeyError:
+        print("Sorry, only letters in the alphabet please!")
+        pass
+    except KeyboardInterrupt:
+        break
+    else:
+        print(code_list)
 
