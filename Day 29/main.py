@@ -6,8 +6,36 @@ import json
 
 DEFAULT_USERNAME = "Angie"
 LETTERS = ""
-# ----- PASSWORD GENERATOR -----
 
+# ----- SEARCH FOR PASSWORD -----
+
+def search_password():
+
+    website = website_input.get()
+
+    if website == "":
+        messagebox.askretrycancel(
+            title="Missing Information", message="Please enter a website.")
+
+    try:
+        with open("password_file.json", "r") as data_file:
+            # Reading old data
+            data = dict(json.load(data_file))
+
+    except FileNotFoundError:
+        messagebox.showinfo(title="No records found!", message="There are no websites saved at the moment!")
+    else:
+        try:
+            username = data[website]["email"]
+            password = data[website]["password"]
+        except KeyError:
+            messagebox.showinfo(title=f"{website}", message="The website was not found!")
+        else:
+            messagebox.showinfo(
+                title=f"{website}", message=f"Username: {username}\nPassword: {password}"
+            )
+
+# ----- PASSWORD GENERATOR -----
 
 def generate_password():
 
@@ -92,8 +120,8 @@ password = Label(text="Password")
 password.grid(row=3, column=0)
 
 # ----- INPUTS -----
-website_input = Entry(width=35)
-website_input.grid(row=1, column=1, columnspan=2)
+website_input = Entry(width=30)
+website_input.grid(row=1, column=1)
 website_input.focus()
 
 username_input = Entry(width=35)
@@ -104,6 +132,9 @@ password_input = Entry(width=20)
 password_input.grid(row=3, column=1)
 
 # ----- BUTTONS -----
+search_pass = Button(text="Search", command=search_password)
+search_pass.grid(row=1, column=2)
+
 gen_pass = Button(text="Generate Password", command=generate_password)
 gen_pass.grid(row=3, column=2)
 
