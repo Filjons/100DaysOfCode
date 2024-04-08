@@ -2,22 +2,32 @@
 from tkinter import *
 from tkinter import messagebox
 import pandas as pd
-
+import random as rd
 BACKGROUND_COLOR = "#B1DDC6"
 DATA_FILE = "Day 31\\data\\french_words.csv"
 
 word = "Word"
+word_list = {}
+
 # ----- DICTIONARIE -----
 data_file = pd.read_csv(DATA_FILE)
 
 word_list = data_file.to_dict()
 
 print(word_list)
+def get_word():
+    global word_list
+    n = rd.randint(0, len(word_list['French']))
+    w = n,word_list['French'][n]
+    print(w)
+    return w
 
 def flip_card():
     global word
-    word = "word 2"
-    flash_card.itemconfig(card_word, text=word)
+    word = get_word()
+    n = word[0]
+    w = word[1]
+    flash_card.itemconfig(card_word, text=w)
 
 # ----- UI SETUP -----
 window = Tk()
