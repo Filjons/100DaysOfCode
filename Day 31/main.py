@@ -9,25 +9,16 @@ DATA_FILE = "Day 31\\data\\french_words.csv"
 word = "Word"
 word_list = {}
 
-# ----- DICTIONARIE -----
+# ----- DICTIONARY -----
 data_file = pd.read_csv(DATA_FILE)
 
-word_list = data_file.to_dict()
+word_list = data_file.to_dict(orient='records')
 
-print(word_list)
-def get_word():
-    global word_list
-    n = rd.randint(0, len(word_list['French']))
-    w = n,word_list['French'][n]
-    print(w)
-    return w
-
-def flip_card():
+def next_card():
     global word
-    word = get_word()
-    n = word[0]
-    w = word[1]
-    flash_card.itemconfig(card_word, text=w)
+    word = rd.choice(word_list)
+    flash_card.itemconfig(card_title, text="French")
+    flash_card.itemconfig(card_word, text=word["French"])
 
 # ----- UI SETUP -----
 window = Tk()
@@ -45,16 +36,18 @@ cards = {front_card,back_card}
 flash_card = Canvas(height=526, width=800,
                     highlightthickness=0, bg=BACKGROUND_COLOR)
 flash_card.create_image(400, 263, image=front_card)
-flash_card.create_text(400, 150, text="Title", font=("Ariel", 40, "italic"))
+card_title = flash_card.create_text(400, 150, text="Title", font=("Ariel", 40, "italic"))
 card_word = flash_card.create_text(400, 263, text=word, font=("Ariel", 60, "bold"))
 
 flash_card.grid(row=0, column=0, columnspan=2)
 
 # ----- BUTTONS -----
-wrong_button = Button(image=wrong_image, highlightthickness=0)
+wrong_button = Button(
+    image=wrong_image, highlightthickness=0, command=next_card)
 wrong_button.grid(row=1, column=0)
 
-right_button = Button(image=right_image, highlightthickness=0, command=flip_card)
+right_button = Button(
+    image=right_image, highlightthickness=0, command=next_card)
 right_button.grid(row=1, column=1)
 
 # ----- LABELS -----
