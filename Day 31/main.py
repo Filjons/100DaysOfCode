@@ -31,6 +31,17 @@ def flip_card():
     flash_card.itemconfig(card_word, text=word["English"], fill="white")
     flash_card.itemconfig(card_background, image=back_card)
 
+def save_card():
+    global word
+    try:
+        with open("words_to_learn.csv", "a") as data_file:
+            data_file.write(f"{word["French"]}, {word["English"]}\n")
+    except FileNotFoundError:
+        with open("words_to_learn.csv", "w") as data_file:
+            data_file.write(f"{word["French"]}, {word["English"]}\n")
+    finally:
+        next_card()
+
 # ----- UI SETUP -----
 window = Tk()
 window.title("Flashy")
@@ -57,7 +68,7 @@ flash_card.grid(row=0, column=0, columnspan=2)
 
 # ----- BUTTONS -----
 wrong_button = Button(
-    image=wrong_image, highlightthickness=0, command=next_card)
+    image=wrong_image, highlightthickness=0, command=save_card)
 wrong_button.grid(row=1, column=0)
 
 right_button = Button(
