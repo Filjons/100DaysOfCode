@@ -14,7 +14,7 @@ iss_longitude = float(iss_data["iss_position"]["longitude"])
 #iss_longitude = float(10)
 
 
-def iss_position():
+def iss_proxi():
 
     if iss_latitude < (MY_LAT + 5.0) and iss_latitude > (MY_LAT - 5.0):
         if iss_longitude < (MY_LONG + 5.0) and iss_longitude > (MY_LONG - 5.0):
@@ -26,6 +26,8 @@ def iss_position():
 
 # Your position is within +5 or -5 degrees of the ISS position.
 
+def notify():
+    print("notification!")
 
 parameters = {
     "lat": MY_LAT,
@@ -41,11 +43,15 @@ sunrise = int(data["results"]["sunrise"].split("T")[1].split(":")[0])
 sunset = int(data["results"]["sunset"].split("T")[1].split(":")[0])
 
 time_now = datetime.now()
-result = data["results"]
-sunrise = result["sunrise"]
-sunset = result["sunset"]
+
+if int(time_now.hour) > 00 and int(time_now.hour) < sunrise:
+    notify()
+
+if int(time_now.hour) < 23 and int(time_now.hour) > sunset:
+    notify()
+
 print(f"sunrise: {sunrise} and sunset: {sunset}")
-print(iss_position())
+print(iss_proxi())
 # If the ISS is close to my current position
 # and it is currently dark
 # Then send me an email to tell me to look up.
