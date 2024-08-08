@@ -3,9 +3,10 @@ from datetime import date
 import json
 from textwrap import indent
 import requests
+from secret_stuff import API_KEY_NEWSAPI
 
+API_KEY = API_KEY_NEWSAPI
 
-API_KEY = '3d2a22d2d96b47e39f879636c766ee64'
 DATE = date.today()
 url = (
     f'https://newsapi.org/v2/top-headlines?q=Tesla&from={DATE}&pageSize=3&apiKey={API_KEY}')
