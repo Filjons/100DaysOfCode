@@ -1,0 +1,45 @@
+{
+    "status": "ok",
+    "totalResults": 6,
+    "articles": [
+        {
+            "source": {
+                "id": "the-huffington-post",
+                "name": "The Huffington Post"
+            },
+            "author": "Marco Margaritoff",
+            "title": "Elon Musk's Daughter Torches Him As Fake Christian, Bigot And 'Serial Adulterer'",
+            "description": "Vivian Wilson also said the Tesla CEO doesn't \"give a f**k about climate change\" and called Arabic the \"language of the enemy.\"",
+            "url": "https://www.huffpost.com/entry/elon-musk-daughter-vivian-wilson_n_66b21a1ae4b0551015a11c9a",
+            "urlToImage": "https://img.huffingtonpost.com/asset/66b240b02500003300049172.jpeg?cache=RLXD1FbAsJ&ops=1200_630",
+            "publishedAt": "2024-08-06T17:04:09Z",
+            "content": "Elon Musks estranged daughter Vivian Wilson skewered her billionaire father on Monday as a liar, bigot and terrible person on a platform he doesnt own.\r\nWilson, 20, launched the thread after spotting\u2026 [+2385 chars]"
+        },
+        {
+            "source": {
+                "id": "business-insider",
+                "name": "Business Insider"
+            },
+            "author": "Nora Naughton",
+            "title": "GM and Ford's gas-powered profits are a problem for Tesla's EV slowdown",
+            "description": "Companies like GM and Ford can rely on hybrids and gas-powered cars to get through the EV slowdown. Tesla can't do that.",
+            "url": "http://www.businessinsider.com/tesla-challenges-amid-hybrid-craze-ford-gm-gas-profits-2024-4",
+            "urlToImage": "https://i.insider.com/66312fcf0dfb1341e900d02b?width=1200&format=jpeg",
+            "publishedAt": "2024-04-30T18:42:46Z",
+            "content": "Tesla is finally being forced to reckon with a slowdown in electric-vehicle demand, and CEO Elon Musk's tactics are likely to look different than his peers' in the automotive industry.\r\nBoth Ford and\u2026 [+2634 chars]"
+        },
+        {
+            "source": {
+                "id": "business-insider",
+                "name": "Business Insider"
+            },
+            "author": "Ana Altchek",
+            "title": "Elon Musk is going 'hardcore' again at Tesla",
+            "description": "Elon Musk made it crystal clear he isn't messing around about the need for meaningful layoffs, a new report reveals.",
+            "url": "http://www.businessinsider.com/elon-musk-tesla-hardcore-layoffs-report-2024-4",
+            "urlToImage": "https://i.insider.com/663148380dfb1341e900e17a?width=1200&format=jpeg",
+            "publishedAt": "2024-04-30T17:42:42Z",
+            "content": "Elon Musk wants there to be no doubt that Tesla needs to be \"hardcore.\"\r\nMusk reaffirmed the company's need for meaningful layoffs and cost-cutting in an email late Monday night, according to a repor\u2026 [+2489 chars]"
+        }
+    ]
+}

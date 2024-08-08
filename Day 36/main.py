@@ -1,8 +1,4 @@
-STOCK_NAME = "TSLA"
-COMPANY_NAME = "Tesla Inc"
-
-STOCK_ENDPOINT = "https://www.alphavantage.co/query"
-NEWS_ENDPOINT = "https://newsapi.org/v2/everything"
+import my_functions
 
     ## STEP 1: Use https://www.alphavantage.co/documentation/#daily
 # When stock price increase/decreases by 5% between yesterday and the day before yesterday then print("Get News").
@@ -14,9 +10,10 @@ NEWS_ENDPOINT = "https://newsapi.org/v2/everything"
 #TODO 3. - Find the positive difference between 1 and 2. e.g. 40 - 20 = -20, but the positive difference is 20. Hint: https://www.w3schools.com/python/ref_func_abs.asp
 
 #TODO 4. - Work out the percentage difference in price between closing price yesterday and closing price the day before yesterday.
-
+price_change = my_functions.get_price_change()
 #TODO 5. - If TODO4 percentage is greater than 5 then print("Get News").
-
+if price_change > 5.0:
+    my_functions.get_news()
     ## STEP 2: https://newsapi.org/ 
     # Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME. 
 
