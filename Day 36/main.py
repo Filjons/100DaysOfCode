@@ -13,7 +13,10 @@ import my_functions
 price_change = my_functions.get_price_change()
 #TODO 5. - If TODO4 percentage is greater than 5 then print("Get News").
 if price_change > 5.0:
-    my_functions.get_news()
+    print(my_functions.get_news())
+
+
+
     ## STEP 2: https://newsapi.org/ 
     # Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME. 
 
@@ -21,7 +24,7 @@ if price_change > 5.0:
 
 #TODO 7. - Use Python slice operator to create a list that contains the first 3 articles. Hint: https://stackoverflow.com/questions/509211/understanding-slice-notation
 
-
+my_functions.print_news(my_functions.get_news())
     ## STEP 3: Use twilio.com/docs/sms/quickstart/python
     #to send a separate message with each article's title and description to your phone number. 
 

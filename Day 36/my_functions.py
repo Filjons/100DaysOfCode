@@ -1,3 +1,5 @@
+from secret_stuff import API_KEY_NEWSAPI
+from datetime import date
 import requests
 import json
 STOCK_NAME = "TSLA"
@@ -5,7 +7,12 @@ COMPANY_NAME = "Tesla Inc"
 STOCK_ENDPOINT = "https://www.alphavantage.co/query"
 API_FUNCTION = "TIME_SERIES_DAILY"
 
+
+API_KEY = API_KEY_NEWSAPI
+
 # Returns the change of the stock price in percentage.
+
+
 def get_price_change():
     '''
     Get the price data API call
@@ -21,7 +28,6 @@ def get_price_change():
     key_Z = 'Time Series (Daily)'
     keys = data[key_Z].keys()
 
-
     key_A = list(keys)[0]
     key_B = list(keys)[1]
 
@@ -29,12 +35,25 @@ def get_price_change():
     price_B = float(data[key_Z][key_B]['4. close'])
 
     diff = abs(price_A - price_B)
-    change = 100*(diff/ price_A)
-    return(change)
+    change = 100*(diff / price_A)
+    return (change)
+
 
 def get_news():
-    url = ('GET https://newsapi.org/v2/everything?q=Apple&from=2024-08-08&sortBy=popularity&apiKey=API_KEY')
 
-    response = requests.get(url)
+    DATE = date.today()
 
-    print(response.json)
+    url = (f'https://newsapi.org/v2/top-headlines?q=Tesla&language=en&from={DATE}&apiKey={API_KEY}')
+
+    r = requests.get(url)
+
+    return(r.json()['articles'])
+
+
+def print_news(news=None):
+
+    head_lines = news[:3]
+
+    print(head_lines)
+
+

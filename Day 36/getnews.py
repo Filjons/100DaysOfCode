@@ -1,15 +1,13 @@
 
 from datetime import date
 import json
-from textwrap import indent
 import requests
 from secret_stuff import API_KEY_NEWSAPI
 
 API_KEY = API_KEY_NEWSAPI
 
 DATE = date.today()
-url = (
-    f'https://newsapi.org/v2/top-headlines?q=Tesla&from={DATE}&pageSize=3&apiKey={API_KEY}')
+url = (f'https://newsapi.org/v2/everything?q=tesla&from={DATE}&apiKey={API_KEY}')
 
 r = requests.get(url)
 
