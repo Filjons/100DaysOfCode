@@ -2,12 +2,13 @@
 from datetime import date
 import json
 import requests
-from secret_stuff import API_KEY_NEWSAPI
+from get_stuff import get_stuff
 
-API_KEY = API_KEY_NEWSAPI
-
-DATE = date.today()
-url = (f'https://newsapi.org/v2/everything?q=tesla&from={DATE}&apiKey={API_KEY}')
+API_KEY = get_stuff('newsapi_key')
+#DATE = date.today()
+#print(DATE)
+DATE = '2024-08-10'
+url = (f'https://newsapi.org/v2/everything?q=tesla&language=en&from={DATE}&apiKey={API_KEY}')
 
 r = requests.get(url)
 
