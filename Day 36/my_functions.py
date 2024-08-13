@@ -41,21 +41,28 @@ def get_price_change():
 def get_news():
 
     #DATE = date.today()
-    DATE = '2024-08-10'
+    DATE = '2024-08-08'
     API_KEY = get_stuff('newsapi_key')
     url = (
         f'https://newsapi.org/v2/everything?q=Tesla&language=en&from={DATE}&apiKey={API_KEY}')
 
     r = requests.get(url)
     data = r.json()
-    #print(data['articles'])
-    return (json.load(data['articles']))
+    #print(data['articles'][:3])
+    
+    return (data['articles'][:3])
 
 
-def print_news(news=None):
-
-    head_lines = news[:3]
-
-    print(head_lines)
-
-
+def format_news(news=[]):
+    news_list = []
+    
+    for i in range(len(news)):
+        n = ''
+        n += (str(news[i]['title']))
+        n += '\n'
+        n += (str(news[i]['description']))
+        n += '\n'
+        n += '\n'
+        news_list.append(n)
+    
+    [print(n) for n in news_list]

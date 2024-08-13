@@ -12,9 +12,11 @@ import my_functions
 #TODO 4. - Work out the percentage difference in price between closing price yesterday and closing price the day before yesterday.
 price_change = my_functions.get_price_change()
 #TODO 5. - If TODO4 percentage is greater than 5 then print("Get News").
+news = []
 if price_change > 5.0:
-    print(my_functions.get_news())
+    news = my_functions.get_news()
 
+news = my_functions.get_news()
 
 
     ## STEP 2: https://newsapi.org/ 
@@ -24,7 +26,7 @@ if price_change > 5.0:
 
 #TODO 7. - Use Python slice operator to create a list that contains the first 3 articles. Hint: https://stackoverflow.com/questions/509211/understanding-slice-notation
 
-my_functions.print_news(my_functions.get_news())
+my_functions.format_news(news=news)
     ## STEP 3: Use twilio.com/docs/sms/quickstart/python
     #to send a separate message with each article's title and description to your phone number. 
 
@@ -34,7 +36,7 @@ my_functions.print_news(my_functions.get_news())
 
 
 
-#Optional TODO: Format the message like this: 
+#Optional TODO: Format the message like this:
 """
 TSLA: 🔺2%
 Headline: Were Hedge Funds Right About Piling Into Tesla Inc. (TSLA)?. 
