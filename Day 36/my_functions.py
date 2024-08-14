@@ -34,8 +34,8 @@ def get_price_change():
     price_B = float(data[key_Z][key_B]['4. close'])
 
     diff = abs(price_A - price_B)
-    change = 100*(diff / price_A)
-    return (change)
+    diff_percentage = (diff / price_A) * 100
+    return (diff_percentage)
 
 
 def get_news():
@@ -55,7 +55,8 @@ def get_news():
 
 def format_news(news=[]):
     news_list = []
-    
+    change = str(get_price_change()) + '\n'
+    news_list.append(change)
     for i in range(len(news)):
         n = ''
         n += (str(news[i]['title']))
