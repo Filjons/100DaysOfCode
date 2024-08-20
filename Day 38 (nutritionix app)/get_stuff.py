@@ -27,5 +27,5 @@ def get_stuff(key=''):
 
 if __name__ == "__main__":
 
-    r = get_stuff("nutritionix")
+    r = get_stuff("sheety")
     print(r['token'])
