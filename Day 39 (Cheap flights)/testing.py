@@ -1,4 +1,5 @@
 import requests
+import os
 from get_stuff import get_stuff
 
 
@@ -21,6 +22,17 @@ def sheety_get_row(row=1):
 
 if __name__ == "__main__":
 
-    r = sheety_get_row(2)
+    '''r = sheety_get_row(2)
     print(r.json())
-    print(r.text)
+    print(r.text)'''
+    vars = os.environ.values
+    print(f"{vars} \n")
+    ENV_VAR = os.environ[
+       "PATH"]
+    print(type(ENV_VAR))
+    print(ENV_VAR)
+    var_list = ENV_VAR.split(";")
+    ind = ENV_VAR.find("\\Microsoft\\WindowsApps")
+    print(ind)
+    print(var_list)
+    print(ENV_VAR[450:460])
