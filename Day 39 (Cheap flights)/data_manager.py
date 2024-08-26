@@ -19,8 +19,9 @@ class DataManager:
         data = requests.get(url=self.url, headers=self.header)
         return data.json()
 
-    def put_data(self):
-        data = requests.get(url=self.url, headers=self.header)
+    def put_data(self, body={}, row=int):
+
+        data = requests.put(url=f"{self.url}/{row}", json=body, headers=self.header)
         return data.json()
 
     pass
