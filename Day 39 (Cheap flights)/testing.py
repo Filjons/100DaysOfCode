@@ -1,6 +1,11 @@
 from data_manager import DataManager
 from flight_search import FlightSearch
 
+fs = FlightSearch()
+
+token = fs._get_new_token()
+
+'''
 m = DataManager()
 data = m.get_data()['prices']
 search = FlightSearch()
@@ -23,4 +28,4 @@ for i in new_data:
         if i['id'] == j:
             b = {'price':i}
             print(m.put_data(body=b, row=j))
-            
+            '''
