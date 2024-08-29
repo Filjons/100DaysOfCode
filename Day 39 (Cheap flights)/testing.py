@@ -3,7 +3,7 @@ from flight_search import FlightSearch
 
 fs = FlightSearch()
 
-token = fs._get_new_token()
+print(fs.get_destination_code(city_name="London"))
 
 '''
 m = DataManager()
