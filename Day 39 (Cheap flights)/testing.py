@@ -1,38 +1,31 @@
-import requests
-import os
-from get_stuff import get_stuff
+from data_manager import DataManager
+from flight_search import FlightSearch
 
+fs = FlightSearch()
 
-USER_NAME = "c3cacb5163317a3fc90abc43cfd73795"
-PROJ_NAME = "myWorkouts"
-SHEET_NAME = "workouts"
-SHEETY_EP = f"https://api.sheety.co/{USER_NAME}/{PROJ_NAME}/{SHEET_NAME}"
+print(fs.get_destination_code(city_name="London"))
 
+'''
+m = DataManager()
+data = m.get_data()['prices']
+search = FlightSearch()
 
-def sheety_get_row(row=1):
-    credentials = get_stuff('sheety')
-    header = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {credentials['token']}"
-    }
-    row_url = f"{SHEETY_EP}/{row}"
+print(data)
+new_data = []
+updated_ind = []
+for i in data:
 
-    return (requests.get(url=row_url, headers=header))
+    if i['iataCode'] == "":
+        i['iataCode'] = search.get_iata(i['city'])
+        new_data.append(i)
+        updated_ind.append(i['id'])
 
+print(new_data)
 
-if __name__ == "__main__":
+for i in new_data:
+    for j in updated_ind:
 
-    '''r = sheety_get_row(2)
-    print(r.json())
-    print(r.text)'''
-    vars = os.environ.values
-    print(f"{vars} \n")
-    ENV_VAR = os.environ[
-       "PATH"]
-    print(type(ENV_VAR))
-    print(ENV_VAR)
-    var_list = ENV_VAR.split(";")
-    ind = ENV_VAR.find("\\Microsoft\\WindowsApps")
-    print(ind)
-    print(var_list)
-    print(ENV_VAR[450:460])
+        if i['id'] == j:
+            b = {'price':i}
+            print(m.put_data(body=b, row=j))
+            '''
