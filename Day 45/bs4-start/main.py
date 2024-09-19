@@ -10,9 +10,10 @@ web_page = responese.text
 soup = BeautifulSoup(web_page, "html.parser")
 # print(soup.prettify())
 article_tag = soup.find(name="span", class_="titleline",)
-# print(article_tag)
+print(article_tag)
 article_text = article_tag.get_text()
-article_link = soup.find(name="a")["href"]
+tag = soup.find(name="a")
+article_link = tag["href"]
 article_upvote = soup.find(name="span", class_="score").get_text()
 
 print(article_text, article_link, article_upvote)
