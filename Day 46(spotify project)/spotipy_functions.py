@@ -24,11 +24,11 @@ def create_playlist(playlist='', description=''):
                             description=description)
 
 
-def add_song_to_playlist(track='', playlist=''):
+def add_song_to_playlist(playlist='', track=[]):
     
     sp = authenticate(scope="playlist-modify-public")
 
-    sp.playlist_add_items(playlist, track)
+    sp.playlist_add_items(playlist_id=playlist, items=track)
 
 
 def authenticate(scope=''):
@@ -40,7 +40,16 @@ def authenticate(scope=''):
 
 def main():
 
-    create_playlist(playlist="test_playlist")
+    #sp = authenticate()
+    #user_id = sp.me()['id']
+    #playlists = sp.user_playlists(user=user_id)
+    #pprint.pprint(playlists)
+
+    uris = ['spotify:track:2RlgNHKcydI9sayD2Df2xp']
+    uri = 'spotify:playlist:68blxQX6RAnBXmYMaOm34O'
+    add_song_to_playlist(playlist=uri, track=uris)
+
+    #create_playlist(playlist="test_playlist")
     # result = sp.search(q='Ritual', limit=5, type='track', market='SE')
 
     # pprint.pprint(result)
