@@ -47,7 +47,7 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=CLIENT_ID,
                                                scope="user-library-read , playlist-modify-public"))
 
 # Test code by fetching some sweet taylor swift stuff.
-
+'''
 results = sp.artist_albums(taylor_uri, album_type='album')
 albums = results['items']
 while results['next']:
@@ -56,3 +56,4 @@ while results['next']:
 
 for album in albums:
     print(album['name'])
+'''
