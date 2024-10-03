@@ -24,6 +24,7 @@ def create_playlist(playlist='', description=''):
     user_id = sp.me()['id']
     sp.user_playlist_create(user_id, playlist,
                             description=description)
+    print("Created a playlist.")
 
 
 def get_playslist_uri(playlist_name=""):
@@ -32,26 +33,32 @@ def get_playslist_uri(playlist_name=""):
     sp = authenticate(scope=scope)
     user_id = sp.me()['id']
     playlists = sp.user_playlists(user=user_id)
-    #pprint.pprint(playlists)
+    # pprint.pprint(playlists)
     temp = playlists['items']
     for list in temp:
         if list['name'] == playlist_name:
             return list['uri']
+    print("Playlist Uri Success!")
+
 
 def get_song_uri(title="", year=""):
 
-    search_str = f"track: {title} year: {year}"
+    search_str = f"track:{title} year:{year}"
 
     sp = authenticate(scope="playlist-modify-public")
-    result = sp.search(search_str)
-    
-    pprint.pprint(result)
+    result = sp.search(q=search_str, limit=1, )
+
+    song_uri = result['tracks']['items'][0]['uri']
+    print("Song Uri Success!")
+    return song_uri
+
 
 def add_song_to_playlist(playlist='', song=[]):
 
     sp = authenticate(scope="playlist-modify-private")
 
     sp.playlist_add_items(playlist_id=playlist, items=song)
+    print("Added song, Success!")
 
 
 def get_songs_from_year(year=""):
@@ -75,28 +82,35 @@ def get_songs_from_year(year=""):
     [song_list.append(f"{song.get_text().strip()}") for song in ranked_list]
 
     # print(song_list)
+    print("Song search Success!")
     return song_list
 
 
 def authenticate(scope=''):
-    return spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=CLIENT_ID,
-                                                     client_secret=CLIENT_SECRET,
-                                                     redirect_uri=REDIRECT_URI,
-                                                     scope=scope))
+    sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=CLIENT_ID,
+                                                   client_secret=CLIENT_SECRET,
+                                                   redirect_uri=REDIRECT_URI,
+                                                   scope=scope))
+    print("Authentication Success!")
+    return sp
+
+
+    
 
 
 def main():
 
-    #playlist = "test_playlist"
-    #playlist_id = create_playlist(playlist=playlist)
+    search_year = "1988-03-19"
+    playlist = "test_playlist"
+    # playlist_id = create_playlist(playlist=playlist)
 
-    #playlist_uri = get_playslist_uri(playlist_name=playlist)
-    
-    #songs = get_songs_from_year(year="1988-03-19")
+    playlist_uri = get_playslist_uri(playlist_name=playlist)
 
-    #add_song_to_playlist()
-    
-    get_song_uri(title="Thunderstruck", year="1976")
+    # songs = get_songs_from_year(year=)
+
+    song_uri = get_song_uri(title="Thunderstruck", year=search_year[0:4])
+    add_song_to_playlist(playlist=playlist_uri,
+                         song=[song_uri])
 
     '''uris = ['spotify:track:2RlgNHKcydI9sayD2Df2xp']
     uri = 'spotify:playlist:68blxQX6RAnBXmYMaOm34O'
