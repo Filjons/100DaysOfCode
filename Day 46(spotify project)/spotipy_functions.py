@@ -12,7 +12,7 @@ credantials = get_stuff("spotify")
 CLIENT_ID = credantials["id"]
 CLIENT_SECRET = credantials["token"]
 REDIRECT_URI = "http://example.com"
-BILLBOARD_URL = "https://www.billboard.com/charts/hot-100/"
+BILLBOARD_URL = "https://www.billboard.com/charts/hot-100"
 logger = logging.getLogger('examples.add_tracks_to_playlist')
 logging.basicConfig(level='DEBUG')
 
@@ -55,7 +55,7 @@ def get_song_uri(title="", year=""):
 
 def add_song_to_playlist(playlist='', song=[]):
 
-    sp = authenticate(scope="playlist-modify-private")
+    sp = authenticate(scope="playlist-modify-public")
 
     sp.playlist_add_items(playlist_id=playlist, items=song)
     print("Added song, Success!")
@@ -83,6 +83,7 @@ def get_songs_from_year(year=""):
 
     # print(song_list)
     print("Song search Success!")
+    print(song_list)
     return song_list
 
 
@@ -95,9 +96,6 @@ def authenticate(scope=''):
     return sp
 
 
-    
-
-
 def main():
 
     search_year = "1988-03-19"
@@ -106,11 +104,17 @@ def main():
 
     playlist_uri = get_playslist_uri(playlist_name=playlist)
 
-    # songs = get_songs_from_year(year=)
+    songs_list = get_songs_from_year(year=search_year)
+    print(songs_list)
+    #song_uri_list = []
 
-    song_uri = get_song_uri(title="Thunderstruck", year=search_year[0:4])
-    add_song_to_playlist(playlist=playlist_uri,
-                         song=[song_uri])
+    #for song in songs:
+
+    #    song_uri_list.append(get_song_uri(title=song, year=search_year[0:4]))
+
+   # print(song_uri_list)
+
+    #add_song_to_playlist(playlist=playlist_uri, song=song_uri_list)
 
     '''uris = ['spotify:track:2RlgNHKcydI9sayD2Df2xp']
     uri = 'spotify:playlist:68blxQX6RAnBXmYMaOm34O'
