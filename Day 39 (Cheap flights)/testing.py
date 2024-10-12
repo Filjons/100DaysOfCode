@@ -3,8 +3,7 @@ from flight_search import FlightSearch
 
 fs = FlightSearch()
 
-print(fs.get_iata("Paris"))
-
+print(fs.get_destination_code(city_name="London"))
 
 '''
 m = DataManager()
