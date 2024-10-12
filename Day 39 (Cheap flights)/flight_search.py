@@ -40,5 +40,6 @@ class FlightSearch:
         return response.json()['access_token']
 
     def get_iata(self, destination=""):
+        
         return "TESTING"
     pass
