@@ -14,7 +14,7 @@ print(article_tag)
 article_text = article_tag.get_text()
 tag = soup.find(name="a")
 article_link = tag["href"]
-article_upvote = soup.find(name="span", class_="score").get_text()
+article_upvote = 
 
 print(article_text, article_link, article_upvote)
 '''for tag in story_list:
