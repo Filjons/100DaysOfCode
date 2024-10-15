@@ -5,11 +5,11 @@ from selenium import webdriver
 HOUSING_URL = 'https://appbrewery.github.io/Zillow-Clone/'
 
 housing_list = []
-housing = {'price':'','size':'','address':''}
+housing = {'price': '', 'size': '', 'address': ''}
 
-//*[@id = "zpid_2056905294"]/div/div[1]/a/address
+
 def get_housing():
-        
+
     # get all data from the web page
 
     responese = requests.get(HOUSING_URL)
@@ -17,17 +17,17 @@ def get_housing():
     # parse the data into a soup using the html.parser
     soup = BeautifulSoup(responese.text, "html.parser")
 
-    housing_price = soup.find(
-        name="span", class_="PropertyCardWrapper__StyledPriceLine",)
+    housing_price = soup.find(class_="PropertyCardWrapper__StyledPriceLine",)
 
+    housing_size = soup.find(name="ul", class_="StyledPropertyCardHomeDetailsList",).find_all(name="li")
 
-    housing_size = soup.find(
-    name="span", class_="StyledPropertyCardHomeDetailsList",)
-    housing_address = soup.find(
-    name="address", class_="PropertyCardWrapper__StyledPriceLine",)
-    article_text = housing_list.get_text()
+    housing_address = soup.find(name="address",)
 
-    print(article_text)
+    housing['price'] = housing_price.get_text().strip()
+    housing['size'] = housing_size[2].get_text().strip()
+    housing['address'] = housing_address.get_text().strip()
+
+    print(housing)
 
 
 def main():
@@ -35,7 +35,7 @@ def main():
     # Keep the browser op after program finishes
     '''
     edge_options = webdriver.EdgeOptions()
-    edge_options.add_experimental_option('detach', True)
+    edge_options.add_experimental_option('detach', True)1
 
     browser = webdriver.Edge(options=edge_options)
     browser.get(url=HOUSING_URL)
@@ -48,7 +48,7 @@ def main():
     '''
     # Close closes a single tab and quit shuts down the browser
     # browser.close()
-    browser.quit()
+    # browser.quit()
 
 
 if __name__ == '__main__':
