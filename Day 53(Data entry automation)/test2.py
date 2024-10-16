@@ -5,7 +5,7 @@ from selenium import webdriver
 HOUSING_URL = 'https://appbrewery.github.io/Zillow-Clone/'
 
 housing_list = []
-housing = {'price': '', 'size': '', 'address': ''}
+housing_det = {'price': '', 'size': '', 'address': ''}
 
 
 def get_housing():
@@ -16,20 +16,17 @@ def get_housing():
 
     # parse the data into a soup using the html.parser
     soup = BeautifulSoup(responese.text, "html.parser")
-    
-    for n in range(0,10):
+    housings = soup.find(name='ul')
+    for n in range(0,5):
+        housing = housings.find_next(
+            name='li', class_="ListItem-c11n-8-84-3-StyledListCardWrapper",)
+        
+        housing_address = housing.find(name = "address",)
 
-        housing_price = soup.find(class_="PropertyCardWrapper__StyledPriceLine",)
+        housing_det['address'] = housing_address.get_text().strip()
+     
 
-        #housing_size = soup.find_next(name="ul", class_="StyledPropertyCardHomeDetailsList",).find_all(name="li")
-
-        housing_address = soup.find(name="address",)
-
-        housing['price'] = housing_price.get_text().strip()
-        #housing['size'] = housing_size[2].get_text().strip()
-        housing['address'] = housing_address.get_text().strip()
-
-        print(housing)
+        print(housing_det)
 
 
 def main():
