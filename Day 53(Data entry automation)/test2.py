@@ -2,9 +2,11 @@ import requests
 from bs4 import BeautifulSoup
 from selenium.webdriver.common.by import By
 from selenium import webdriver
+import pprint
+
 HOUSING_URL = 'https://appbrewery.github.io/Zillow-Clone/'
 
-housing_list = []
+
 housing_det = {'price': '', 'size': '', 'address': ''}
 
 
@@ -12,23 +14,27 @@ def get_housing():
 
     # get all data from the web page
 
-    responese = requests.get(HOUSING_URL)
+    responese = requests.get(HOUSING_URL).text
 
     # parse the data into a soup using the html.parser
-    soup = BeautifulSoup(responese.text, "html.parser")
-    housings = soup.find(name='ul')
-    for n in range(0,5):
+    soup = BeautifulSoup(responese, 'html.parser')
+    
+    print(soup.prettify())
+
+    housings = soup.find_all('li', class_="ListItem-c11n-8-84-3-StyledListCardWrapper")
+
+'''
+    for n in range(0, 5):
         housing = housings.find_next(
             name='li', class_="ListItem-c11n-8-84-3-StyledListCardWrapper",)
-        
-        housing_address = housing.find(name = "address",)
+
+        housing_address = housing.find(name="address",)
 
         housing_det['address'] = housing_address.get_text().strip()
-     
 
         print(housing_det)
 
-
+'''
 def main():
     get_housing()
     # Keep the browser op after program finishes
