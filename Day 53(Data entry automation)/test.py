@@ -21,7 +21,7 @@ def get_housing():
 
         housing_price = soup.find(class_="PropertyCardWrapper__StyledPriceLine",)
 
-        #housing_size = soup.find_next(name="ul", class_="StyledPropertyCardHomeDetailsList",).find_all(name="li")
+        housing_size = soup.find_next(name="ul", class_="StyledPropertyCardHomeDetailsList",).find_all(name="li")
 
         housing_address = soup.find(name="address",)
 
