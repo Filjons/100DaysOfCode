@@ -1,4 +1,5 @@
 from flask import Flask
+from random import randint
 app = Flask(__name__)
 
 
@@ -36,5 +37,22 @@ def front_page():
 @make_underline
 def bye():
     return "Bye!"
+
+
+@app.route('/<int:num>')
+
+def number(num):
+    random_num = randint(0, 9)
+
+    if num > random_num:
+        return '<h1 style="color: red">Too high!</h1><br><br>' \
+               '<img src="https://media3.giphy.com/media/JT7Td5xRqkvHQvTdEu/giphy.gif" width=300>'
+    elif num < random_num:
+        return '<h1 style="color: blue">Too low!</h1><br><br>' \
+               '<img src="https://media3.giphy.com/media/JT7Td5xRqkvHQvTdEu/giphy.gif" width=300>'
+    elif num == random_num:
+        return '<h1 style="color: green">Correct!</h1><br><br>' \
+               '<img src="https://media3.giphy.com/media/de7siRDyeOBpe/giphy.gif">'
+    
 if __name__ == '__main__':
     app.run()
